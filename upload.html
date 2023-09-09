@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload File</title>
+    <link href="static/style.css" type="text/css" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    var socket = io.connect('http://' + document.domain + ':' + location.port + '/upload');
+
+    socket.on('connect', function() {
+        console.log('Socket connected');
+    });
+
+    socket.on('progress', function(data) {
+        document.getElementById('progress').innerHTML = data.message;
+    });
+
+    socket.on('estimated_remaining_time', function(data) {
+        document.getElementById('estimated_remaining_time').innerHTML = data.message;
+    });
+});
+</script>
+</head>
+<body>
+    <h1 class="h1">Загрузить видео</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <div class="forms">
+        {{ form.hidden_tag() }}
+        {{ form.file.label }} {{ form.file() }} <br><br>
+        {{ form.scale_factor.label }} {{ form.scale_factor() }} <br><br>
+        {{ form.submit() }}
+        </div>
+    </form>
+    <div id="progress"> <a>Прогресс: </a>0</div>
+    <div id="estimated_remaining_time"><a>Время обработки: </a>0</div>
+</body>
+</html>

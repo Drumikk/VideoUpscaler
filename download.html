@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download File</title>
+    <link href="static/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <h1 class="h1">Файл успешно был обработан!</h1>
+    <div class="forms">
+        <a href="/download/{{ filename }}">Загрузить обработанный файл</a>
+        <a></a>
+        <p>PSNR: {{ psnr_score }}</p>
+        <p>Общее затраченное время: {{ total_processing_time }} мин.</p>
+    </div>
+</body>
+</html>
